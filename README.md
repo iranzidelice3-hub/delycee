@@ -1,2 +1,2 @@
 # iranzi
-i love my self
+i know u do
