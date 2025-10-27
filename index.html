@@ -1,151 +1,435 @@
-   <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ebite Order Tracking</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #e6eef6;
-    }
-
-    .container {
-      width: 95%;
-      max-width: 1600px;
-      margin: 60px auto;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      padding: 50px;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 50px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .logo img {
-      width: 120px;
-      height: 120px;
-      border-radius: 20px;
-    }
-
-    .logo-text h1 {
-      font-size: 42px;
-      color: #0d47a1;
-      margin: 0;
-    }
-
-    .logo-text p {
-      font-size: 18px;
-      color: #555;
-    }
-
-    .search {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 40px;
-    }
-
-    .search input {
-      flex: 1;
-      padding: 20px;
-      font-size: 18px;
-      border-radius: 12px;
-      border: 2px solid #ccc;
-    }
-
-    .search button {
-      background: #1565c0;
-      color: white;
-      padding: 18px 35px;
-      font-size: 18px;
-      border: none;
-      border-radius: 12px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .search button:hover {
-      background: #0d47a1;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      font-size: 18px;
-    }
-
-    th, td {
-      padding: 20px;
-      text-align: left;
-      border-bottom: 2px solid #e0e0e0;
-    }
-
-    th {
-      background-color: #f0f5fb;
-      color: #333;
-    }
-
-    tr:hover {
-      background-color: #f9fcff;
-    }
-
-    .item-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 12px;
-      object-fit: cover;
-      border: 2px solid #ddd;
-    }
-
-    .badge {
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-weight: bold;
-      font-size: 16px;
-      text-align: center;
-      display: inline-block;
-    }
-
-    .pending { background: #fff3cd; color: #856404; }
-    .shipped { background: #d1ecf1; color: #0c5460; }
-    .delivered { background: #d4edda; color: #155724; }
-    .cancelled { background: #f8d7da; color: #721c24; }
-
-    footer {
-      margin-top: 60px;
-      background: #0d47a1;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-      border-radius: 0 0 20px 20px;
-    }
-
-    footer a {
-      color: #bbdefb;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 0 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking - E-Commerce</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Load Lucide Icons -->
+    <script type="module" src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* Custom styles for the visual timeline */
+        .timeline-step {
+            position: relative;
+            z-index: 10;
+        }
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: #d1d5db;
+            transform: translateY(-50%);
+            z-index: 5;
+        }
+        .timeline-progress {
+            background-color: #10b981; /* Green for progress */
+        }
+        .step-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .step-active {
+            background-color: #10b981; /* Active/Done */
+        }
+        .step-pending {
+            background-color: #6b7280; /* Pending */
+        }
+        .step-current {
+            background-color: #3b82f6; /* In Progress */
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
+        }
+        @media (max-width: 640px) {
+            .timeline-line {
+                display: none; /* Hide line on mobile for simpler stacking */
+            }
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <div class="logo">
-        <img src="https://via.placeholder.com/120?text=EB" alt="Ebite Logo">
-        <div class="logo-text">
-          <h1>Ebit
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header (Simple Navigation) -->
+    <header class="bg-indigo-700 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-white">E-Tracker</h1>
+            <nav>
+                <a href="#" class="text-white hover:text-indigo-200 text-sm font-medium transition duration-150">Help & Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl mx-auto w-full p-4 sm:p-8">
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-6 text-center">Track Your Order</h2>
+
+            <!-- Input Form -->
+            <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                <input type="text" id="trackingNumberInput" placeholder="Enter Tracking Number (e.g., TRK12345)" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 shadow-sm transition duration-150" value="TRK12345">
+                <button id="trackButton" onclick="handleTrack()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 transform hover:scale-[1.02] active:scale-[0.98]">
+                    Track Order
+                </button>
+            </div>
+
+            <!-- Status Message Area -->
+            <div id="statusMessage" class="hidden p-4 rounded-lg text-center mb-6 transition duration-300"></div>
+
+            <!-- Tracking Output Area -->
+            <div id="trackingOutput" class="hidden">
+
+                <!-- Order Summary Card -->
+                <div class="bg-indigo-50 p-6 rounded-xl mb-8 shadow-inner border border-indigo-200">
+                    <h3 class="text-xl font-bold text-indigo-800 mb-3 flex items-center">
+                        <i data-lucide="package-check" class="w-6 h-6 mr-2"></i>
+                        Order Summary
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+                        <div>
+                            <p class="text-gray-500 font-medium">Tracking ID:</p>
+                            <p class="font-semibold text-gray-900" id="detailTrackingId"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 font-medium">Expected Delivery:</p>
+                            <p class="font-semibold text-gray-900" id="detailExpectedDate"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 font-medium">Ship To:</p>
+                            <p class="font-semibold text-gray-900" id="detailShipTo"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 font-medium">Current Status:</p>
+                            <span class="font-bold px-3 py-1 rounded-full text-white" id="detailCurrentStatus"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Tracking Timeline -->
+                <div class="relative flex justify-between items-center my-12 pt-4">
+                    <div class="timeline-line">
+                        <div id="timelineProgress" class="h-full absolute left-0 timeline-progress transition-all duration-700 ease-out"></div>
+                    </div>
+
+                    <div id="stepOrdered" class="timeline-step text-center w-1/4">
+                        <div class="step-icon mx-auto mb-2"><i data-lucide="credit-card"></i></div>
+                        <span class="text-xs font-medium text-gray-600">Ordered</span>
+                    </div>
+
+                    <div id="stepShipped" class="timeline-step text-center w-1/4">
+                        <div class="step-icon mx-auto mb-2"><i data-lucide="truck"></i></div>
+                        <span class="text-xs font-medium text-gray-600">Shipped</span>
+                    </div>
+
+                    <div id="stepOutForDelivery" class="timeline-step text-center w-1/4">
+                        <div class="step-icon mx-auto mb-2"><i data-lucide="package"></i></div>
+                        <span class="text-xs font-medium text-gray-600">Out for Delivery</span>
+                    </div>
+
+                    <div id="stepDelivered" class="timeline-step text-center w-1/4">
+                        <div class="step-icon mx-auto mb-2"><i data-lucide="home"></i></div>
+                        <span class="text-xs font-medium text-gray-600">Delivered</span>
+                    </div>
+                </div>
+
+
+                <!-- Tracking History Table -->
+                <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">Tracking History</h3>
+                <div class="overflow-x-auto rounded-xl shadow-lg border border-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trackingTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Tracking steps will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer (Fulfills "fotters" request) -->
+    <footer class="bg-gray-800 text-white mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-gray-700 pb-6 mb-6">
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-indigo-300">E-Tracker</h4>
+                    <p class="text-gray-400">Your trusted partner for shipment visibility. We ensure you know where your order is, every step of the way.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-indigo-300">Quick Links</h4>
+                    <ul class="space-y-1 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition duration-150">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-2 text-indigo-300">Support</h4>
+                    <p class="text-gray-400">Email: support@etracker.com</p>
+                    <p class="text-gray-400">Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="text-center text-gray-500 pt-4">
+                &copy; 2025 E-Tracker. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- MOCK DATA SIMULATION ---
+        const MOCK_ORDERS = {
+            'TRK12345': {
+                status: 'Delivered',
+                expected: 'Oct 30, 2025',
+                shipTo: '123 Main St, Anytown',
+                history: [
+                    { date: '2025-10-25', time: '10:00 AM', status: 'Order Placed', location: 'Online' },
+                    { date: '2025-10-25', time: '02:30 PM', status: 'Shipped', location: 'Warehouse, TX' },
+                    { date: '2025-10-26', time: '08:00 AM', status: 'In Transit', location: 'Sorting Facility, CA' },
+                    { date: '2025-10-27', time: '07:00 AM', status: 'Out for Delivery', location: 'Local Hub, Anytown' },
+                    { date: '2025-10-27', time: '03:45 PM', status: 'Delivered', location: 'Front Door' }
+                ]
+            },
+            'TRK67890': {
+                status: 'In Transit',
+                expected: 'Oct 31, 2025',
+                shipTo: '456 Oak Ave, Bigcity',
+                history: [
+                    { date: '2025-10-26', time: '01:00 PM', status: 'Order Placed', location: 'Online' },
+                    { date: '2025-10-26', time: '05:00 PM', status: 'Shipped', location: 'Warehouse, FL' },
+                    { date: '2025-10-27', time: '11:00 AM', status: 'In Transit', location: 'Regional Center, GA' }
+                ]
+            }
+        };
+
+        const statusMap = {
+            'Order Placed': 1,
+            'Shipped': 2,
+            'In Transit': 3,
+            'Out for Delivery': 4,
+            'Delivered': 4 // Both out for delivery and delivered represent the final step visually
+        };
+
+        const elements = {
+            output: document.getElementById('trackingOutput'),
+            message: document.getElementById('statusMessage'),
+            tableBody: document.getElementById('trackingTableBody'),
+            detailTrackingId: document.getElementById('detailTrackingId'),
+            detailExpectedDate: document.getElementById('detailExpectedDate'),
+            detailShipTo: document.getElementById('detailShipTo'),
+            detailCurrentStatus: document.getElementById('detailCurrentStatus'),
+            timelineProgress: document.getElementById('timelineProgress'),
+            steps: {
+                Ordered: document.getElementById('stepOrdered'),
+                Shipped: document.getElementById('stepShipped'),
+                OutForDelivery: document.getElementById('stepOutForDelivery'),
+                Delivered: document.getElementById('stepDelivered'),
+            }
+        };
+
+        /**
+         * Converts the final status string to Tailwind classes for display.
+         * @param {string} status - The current final status of the order.
+         * @returns {string} Tailwind class string.
+         */
+        function getStatusClasses(status) {
+            switch (status) {
+                case 'Delivered':
+                    return 'bg-green-500';
+                case 'Out for Delivery':
+                    return 'bg-blue-500 animate-pulse';
+                case 'Shipped':
+                case 'In Transit':
+                    return 'bg-yellow-500';
+                case 'Order Placed':
+                    return 'bg-gray-500';
+                default:
+                    return 'bg-red-500';
+            }
+        }
+
+        /**
+         * Displays a temporary status or error message.
+         * @param {string} text - The message to display.
+         * @param {boolean} isError - True if it's an error message.
+         */
+        function displayMessage(text, isError) {
+            elements.output.classList.add('hidden');
+            elements.message.classList.remove('hidden');
+            elements.message.textContent = text;
+            if (isError) {
+                elements.message.className = 'p-4 rounded-lg text-center mb-6 transition duration-300 bg-red-100 text-red-700 font-medium';
+            } else {
+                elements.message.className = 'p-4 rounded-lg text-center mb-6 transition duration-300 bg-green-100 text-green-700 font-medium';
+            }
+        }
+
+        /**
+         * Renders the order details and tracking history table.
+         * @param {object} orderData - The mock order object.
+         */
+        function renderTracking(orderData) {
+            elements.message.classList.add('hidden');
+            elements.output.classList.remove('hidden');
+
+            // --- 1. Update Order Summary Card ---
+            elements.detailTrackingId.textContent = document.getElementById('trackingNumberInput').value;
+            elements.detailExpectedDate.textContent = orderData.expected;
+            elements.detailShipTo.textContent = orderData.shipTo;
+
+            elements.detailCurrentStatus.textContent = orderData.status;
+            elements.detailCurrentStatus.className = `font-bold px-3 py-1 rounded-full text-white ${getStatusClasses(orderData.status)}`;
+
+            // --- 2. Update Tracking History Table (The 'tables' part of your request) ---
+            elements.tableBody.innerHTML = ''; // Clear previous entries
+            // Reverse history to show most recent at the top
+            orderData.history.slice().reverse().forEach(step => {
+                const row = elements.tableBody.insertRow();
+                row.className = 'hover:bg-gray-50 transition duration-150';
+
+                // Date
+                let cell = row.insertCell();
+                cell.className = 'px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900';
+                cell.textContent = step.date;
+
+                // Time
+                cell = row.insertCell();
+                cell.className = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
+                cell.textContent = step.time;
+
+                // Status (Styled using spans in the table)
+                cell = row.insertCell();
+                cell.className = 'px-6 py-4 whitespace-nowrap text-sm';
+                const statusSpan = document.createElement('span');
+                statusSpan.textContent = step.status;
+                statusSpan.className = `inline-flex px-3 py-1 text-xs font-semibold leading-5 rounded-full ${getStatusClasses(step.status).replace('bg', 'bg-opacity-10 text')}`; // Use a light background for table status
+                cell.appendChild(statusSpan);
+
+                // Location
+                cell = row.insertCell();
+                cell.className = 'px-6 py-4 whitespace-nowrap text-sm text-gray-500';
+                cell.textContent = step.location;
+            });
+
+            // --- 3. Update Visual Timeline ---
+            const finalStatus = orderData.history[orderData.history.length - 1].status;
+            const finalStepIndex = statusMap[finalStatus] || 1; // Default to 1 (Ordered)
+
+            // Reset all steps
+            Object.values(elements.steps).forEach(step => {
+                step.querySelector('.step-icon').classList.remove('step-active', 'step-current', 'step-pending');
+                step.querySelector('.step-icon').classList.add('step-pending');
+            });
+
+            // Update steps based on progress
+            let progressWidth = 0;
+            const totalSteps = 4;
+            let currentStepName = '';
+
+            if (finalStepIndex === 4 && finalStatus === 'Delivered') {
+                progressWidth = 100; // Complete
+                currentStepName = 'Delivered';
+            } else if (finalStepIndex === 4 && finalStatus === 'Out for Delivery') {
+                progressWidth = 75; // Out for Delivery
+                currentStepName = 'OutForDelivery';
+            } else if (finalStepIndex === 3) {
+                progressWidth = 50; // Shipped / In Transit
+                currentStepName = 'Shipped'; // Use Shipped step visually for both Shipped and In Transit
+            } else if (finalStepIndex === 2) {
+                progressWidth = 33.3; // Shipped
+                currentStepName = 'Shipped';
+            } else {
+                progressWidth = 0; // Ordered
+                currentStepName = 'Ordered';
+            }
+
+
+            // Apply active/current classes and calculate progress
+            Object.keys(elements.steps).forEach((stepKey, index) => {
+                const stepElement = elements.steps[stepKey];
+                const iconElement = stepElement.querySelector('.step-icon');
+                const stepIndex = index + 1;
+
+                if (stepIndex < finalStepIndex || finalStatus === 'Delivered' && stepKey === 'Delivered') {
+                    // Mark as complete/active
+                    iconElement.classList.remove('step-pending', 'step-current');
+                    iconElement.classList.add('step-active');
+                } else if (stepIndex === finalStepIndex) {
+                    // Mark as current (blue)
+                    iconElement.classList.remove('step-pending', 'step-active');
+                    iconElement.classList.add('step-current');
+                } else {
+                    // Mark as pending (gray)
+                    iconElement.classList.remove('step-active', 'step-current');
+                    iconElement.classList.add('step-pending');
+                }
+            });
+
+
+            // Adjust progress bar width
+            elements.timelineProgress.style.width = `${progressWidth}%`;
+
+            // Rerender Lucide icons (needed because we manipulate the inner HTML)
+            lucide.createIcons();
+        }
+
+        /**
+         * Main function to handle the tracking submission.
+         */
+        function handleTrack() {
+            const input = document.getElementById('trackingNumberInput').value.trim().toUpperCase();
+
+            // Simulate loading state (optional, but good UX)
+            document.getElementById('trackButton').textContent = 'Tracking...';
+            document.getElementById('trackButton').disabled = true;
+
+            // Simulate network delay
+            setTimeout(() => {
+                document.getElementById('trackButton').textContent = 'Track Order';
+                document.getElementById('trackButton').disabled = false;
+
+                const order = MOCK_ORDERS[input];
+
+                if (order) {
+                    renderTracking(order);
+                } else {
+                    // Error state
+                    displayMessage(`Tracking number "${input}" not found. Please check the number and try again.`, true);
+                }
+            }, 1000); // 1 second delay
+        }
+
+        // Run tracking on load with the default value
+        window.onload = handleTrack;
+
+    </script>
+</body>
+</html>
+
+
+
+  
+  
+    
