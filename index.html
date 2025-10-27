@@ -1,121 +1,151 @@
-<!doctype html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HTML Prompt → File Generator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ebite Order Tracking</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#7dd3fc}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#071028 0%,#0b1220 100%);color:#e6eef6;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
-    .wrap{width:100%;max-width:980px}
-    header{display:flex;gap:16px;align-items:center;margin-bottom:18px}
-    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(90deg,#0ea5e9,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#012;box-shadow:0 6px 18px rgba(2,6,23,.6)}
-    h1{font-size:20px;margin:0}
-    p.lead{margin:4px 0 0;color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
-    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 24px rgba(2,6,23,.6)}
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-    textarea,input,select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.04);background:transparent;color:inherit;font-size:14px;resize:vertical}
-    textarea{min-height:220px}
-    .controls{display:flex;gap:8px;margin-top:10px}
-    button{background:var(--accent);border:none;padding:10px 12px;border-radius:10px;font-weight:600;cursor:pointer}
-    button.secondary{background:transparent;border:1px solid rgba(255,255,255,.06);color:var(--muted)}
-    .preview{height:520px;overflow:auto;border-radius:8px;border:1px solid rgba(255,255,255,.03)}
-    .meta{display:flex;gap:12px;align-items:center;margin-top:8px}
-    .note{font-size:12px;color:var(--muted)}
-    footer{margin-top:12px;color:var(--muted);font-size:12px}
-    @media (max-width:900px){.grid{grid-template-columns:1fr;}.preview{height:360px}}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e6eef6;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1600px;
+      margin: 60px auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 50px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 50px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo img {
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+    }
+
+    .logo-text h1 {
+      font-size: 42px;
+      color: #0d47a1;
+      margin: 0;
+    }
+
+    .logo-text p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .search {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .search input {
+      flex: 1;
+      padding: 20px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+    }
+
+    .search button {
+      background: #1565c0;
+      color: white;
+      padding: 18px 35px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .search button:hover {
+      background: #0d47a1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    th, td {
+      padding: 20px;
+      text-align: left;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    th {
+      background-color: #f0f5fb;
+      color: #333;
+    }
+
+    tr:hover {
+      background-color: #f9fcff;
+    }
+
+    .item-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid #ddd;
+    }
+
+    .badge {
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .pending { background: #fff3cd; color: #856404; }
+    .shipped { background: #d1ecf1; color: #0c5460; }
+    .delivered { background: #d4edda; color: #155724; }
+    .cancelled { background: #f8d7da; color: #721c24; }
+
+    footer {
+      margin-top: 60px;
+      background: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    footer a {
+      color: #bbdefb;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
+    }
   </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <div class="logo">PG</div>
-      <div>
-        <h1>HTML Prompt → File Generator</h1>
-        <p class="lead">Type a prompt or paste HTML. Click <strong>Generate</strong> to preview and download a single-file HTML.</p>
-      </div>
-    </header>
-
-    <div class="grid">
-      <section class="card">
-        <label for="prompt">Prompt or HTML</label>
-        <textarea id="prompt" placeholder="Write a short instruction for the page you want, e.g. 'A landing page for a coffee shop with a signup form and menu' — or paste complete HTML here."></textarea>
-
-        <div class="meta">
-          <div class="note">Template options:</div>
-          <select id="template">
-            <option value="landing">Clean Landing Page</option>
-            <option value="article">Article / Blog Post</option>
-            <option value="docs">Documentation / Cheatsheet</option>
-          </select>
-        </div>
-
-        <div class="controls">
-          <button id="generate">Generate HTML</button>
-          <button id="download" class="secondary" disabled>Download .html</button>
-          <button id="reset" class="secondary">Reset</button>
-        </div>
-
-        <div style="margin-top:12px" class="note">Tip: If you paste full HTML into the prompt, the tool will use it as-is. Otherwise it will expand your prompt into a sensible single-file HTML using the chosen template.</div>
-      </section>
-
-      <aside class="card">
-        <label>Live Preview</label>
-        <div id="preview" class="preview"></div>
-        <footer>Preview updates when you click <strong>Generate</strong>.</footer>
-      </aside>
-    </div>
-  </div>
-
-  <script>
-    // Simple single-file generator — no server required.
-    const promptEl = document.getElementById('prompt');
-    const templateEl = document.getElementById('template');
-    const previewEl = document.getElementById('preview');
-    const generateBtn = document.getElementById('generate');
-    const downloadBtn = document.getElementById('download');
-    const resetBtn = document.getElementById('reset');
-
-    // Basic templates — lightweight and editable inside the generated file.
-    const TEMPLATES = {
-      landing: (title, bodyContent)=>`<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>${escapeHtml(title)}</title>
-  <style>body{font-family:system-ui,Segoe UI,Roboto,Arial;line-height:1.5;padding:28px;color:#0b1220}.container{max-width:900px;margin:0 auto}header{display:flex;justify-content:space-between;align-items:center}h1{margin:0 0 8px}p.lead{color:#334155} .hero{background:#f8fafc;padding:24px;border-radius:10px;margin-top:18px} .cta{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:8px;background:#06b6d4;color:white;text-decoration:none}</style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div>
-        <h1>${escapeHtml(title)}</h1>
-        <p class="lead">Quickly generated from your prompt.</p>
-      </div>
-    </header>
-    <section class="hero">
-      ${bodyContent || '<p>Add your hero copy here — describe the product, service, or event in one or two lines.</p><a class="cta" href="#">Call to action</a>'}
-    </section>
-  </div>
-</body>
-</html>`,
-      article: (title, bodyContent)=>`<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)}</title><style>body{font-family:Georgia,serif;max-width:760px;margin:36px auto;color:#0b1220;padding:0 18px}h1{font-size:32px}p{font-size:18px;line-height:1.7;color:#334155}footer{margin-top:36px;font-size:14px;color:#6b7280}</style></head><body><article><h1>${escapeHtml(title)}</h1>${bodyContent||'<p>Start your article here. Replace this text with sections, headings, and images as needed.</p>'}<footer>Generated with the HTML Prompt Generator.</footer></article></body></html>`,
-      docs: (title, bodyContent)=>`<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)} — Docs</title><style>body{font-family:system-ui,Arial;max-width:980px;margin:28px auto;padding:18px;color:#0b1220}pre{background:#f1f5f9;padding:12px;border-radius:8px;overflow:auto}h1{margin-top:0}section{margin-bottom:18px}</style></head><body><main><h1>${escapeHtml(title)}</h1><section>${bodyContent||'<p>Quick start and usage examples go here.</p><pre>npm install your-package</pre>'}</section></main></body></html>`
-    };
-
-    function escapeHtml(s){return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
-
-    function isFullHtml(s){return /<\s*html[\s>]/i.test(s) || /<\s*doctype/i.test(s)}
-
-    function buildHtmlFromPrompt(prompt, template){
-      if(!prompt) prompt = 'Untitled page';
-      // If the user pasted full HTML, use it directly.
-      if(isFullHtml(prompt)) return prompt;
-
-      const lines = prompt.split('\n').map(l=>l.trim()).filter(Boolean);
-      const title = lines[0] || 'Untitled page';
-      const body = lines.slice(1).join('\n'
+      <div class="logo">
+        <img src="https://via.placeholder.com/120?text=EB" alt="Ebite Logo">
+        <div class="logo-text">
+          <h1>Ebit
