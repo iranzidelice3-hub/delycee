@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delycee Iranzi | Full Stack Developer Portfolio</title>
+    <!-- Load Tailwind CSS for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* GitHub Dark Theme background */
+            color: #c9d1d9; /* Light text color */
+            scroll-behavior: smooth;
+        }
+        /* Style for the skill chip cards */
+        .skill-chip {
+            @apply bg-gray-700 text-gray-50 text-sm font-medium px-4 py-2 rounded-full transition duration-300 hover:bg-emerald-600 hover:shadow-lg;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation (Sticky for easy access) -->
+    <header class="sticky top-0 z-50 bg-[#0d1117]/90 backdrop-blur-sm shadow-xl border-b border-gray-800">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-emerald-400 hover:text-emerald-300 transition duration-300">
+                &lt;Delycee Iranzi /&gt;
+            </a>
+            <div class="space-x-4 hidden md:flex">
+                <a href="#about" class="text-gray-300 hover:text-emerald-400 transition duration-300 font-medium">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-emerald-400 transition duration-300 font-medium">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-emerald-400 transition duration-300 font-medium">Projects</a>
+                <a href="#contact" class="text-gray-300 hover:text-emerald-400 transition duration-300 font-medium">Contact</a>
+            </div>
+            <!-- Mobile Menu Placeholder (Normally would require JS to toggle visibility) -->
+            <button class="md:hidden text-gray-300 hover:text-emerald-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- 1. Hero Section -->
+        <section id="hero" class="py-20 md:py-32 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-3/5">
+                <p class="text-xl text-emerald-400 mb-3">Hello, I'm</p>
+                <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight text-white mb-4">
+                    Delycee Iranzi
+                </h1>
+                <h2 class="text-2xl sm:text-4xl font-light text-gray-400 mb-8">
+                    Building Seamless User Experiences as a <span class="text-emerald-400 font-semibold">Full Stack Developer</span>.
+                </h2>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#projects" class="inline-block px-8 py-3 text-lg font-semibold text-white bg-emerald-600 rounded-lg shadow-md hover:bg-emerald-700 transition duration-300 text-center">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="inline-block px-8 py-3 text-lg font-semibold text-emerald-400 border border-emerald-600 rounded-lg hover:bg-emerald-600 hover:text-white transition duration-300 text-center">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+            <div class="mt-12 md:mt-0 md:w-2/5 flex justify-center">
+                <!-- Placeholder for a professional profile image or illustration -->
+                <div class="w-64 h-64 sm:w-80 sm:h-80 bg-gray-700 rounded-full flex items-center justify-center border-4 border-emerald-600 shadow-2xl shadow-emerald-900/50">
+                    <span class="text-3xl text-white font-bold">DI</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px bg-gray-800 my-16"></div>
+
+        <!-- 2. About Section -->
+        <section id="about" class="py-16 md:py-20">
+            <h2 class="text-4xl font-bold text-white mb-10 border-b-4 border-emerald-600 pb-2 inline-block">About Me</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        I am a dedicated Full Stack Developer with 5 years of experience specializing in scalable web applications. My passion lies in bridging the gap between design and functionality, creating beautiful, efficient, and maintainable software solutions.
+                    </p>
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        My expertise spans both the front-end, where I focus on modern frameworks and adaptive design, and the back-end, where I architect robust APIs and manage high-performance databases. I thrive in collaborative environments and am always eager to learn new technologies to solve complex problems.
+                    </p>
+                    <a href="#" class="text-emerald-400 hover:text-emerald-300 font-medium border-b border-emerald-400 transition duration-300 inline-block">
+                        Download Resume (PDF) &rarr;
+                    </a>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+                    <h3 class="text-2xl font-semibold text-white mb-4">My Philosophy</h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-emerald-400 mr-3 mt-1">&#x2022;</span>
+                            <div>
+                                <strong class="text-white">Clean Code:</strong> Writing readable, testable, and maintainable code is paramount.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-400 mr-3 mt-1">&#x2022;</span>
+                            <div>
+                                <strong class="text-white">User-Centric Design:</strong> The final product must always serve the end-user's needs.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-emerald-400 mr-3 mt-1">&#x2022;</span>
+                            <div>
+                                <strong class="text-white">Continuous Improvement:</strong> The tech landscape changes constantly, and so should my skillset.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px bg-gray-800 my-16"></div>
+
+        <!-- 3. Skills Section -->
+        <section id="skills" class="py-16 md:py-20">
+            <h2 class="text-4xl font-bold text-white mb-10 border-b-4 border-emerald-600 pb-2 inline-block">Tech Stack & Skills</h2>
+
+            <div class="space-y-10">
+                <!-- Front-end -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-400 mb-5">Front-end Development</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="skill-chip">React.js</div>
+                        <div class="skill-chip">Vue.js</div>
+                        <div class="skill-chip">JavaScript (ES6+)</div>
+                        <div class="skill-chip">TypeScript</div>
+                        <div class="skill-chip">HTML5 & CSS3</div>
+                        <div class="skill-chip">Tailwind CSS</div>
+                        <div class="skill-chip">Sass/Less</div>
+                        <div class="skill-chip">Responsive Design</div>
+                    </div>
+                </div>
+
+                <!-- Back-end & API -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-400 mb-5">Back-end & API</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="skill-chip">Node.js / Express</div>
+                        <div class="skill-chip">Python / Django</div>
+                        <div class="skill-chip">Go</div>
+                        <div class="skill-chip">RESTful APIs</div>
+                        <div class="skill-chip">GraphQL</div>
+                        <div class="skill-chip">Microservices</div>
+                    </div>
+                </div>
+
+                <!-- Databases & Tools -->
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-400 mb-5">Databases & Tools</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="skill-chip">PostgreSQL</div>
+                        <div class="skill-chip">MongoDB</div>
+                        <div class="skill-chip">Redis</div>
+                        <div class="skill-chip">Docker</div>
+                        <div class="skill-chip">Kubernetes (Basic)</div>
+                        <div class="skill-chip">AWS (EC2, S3, Lambda)</div>
+                        <div class="skill-chip">Git & GitHub</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px bg-gray-800 my-16"></div>
+
+        <!-- 4. Projects Section -->
+        <section id="projects" class="py-16 md:py-20">
+            <h2 class="text-4xl font-bold text-white mb-12 border-b-4 border-emerald-600 pb-2 inline-block">Featured Projects</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                <!-- Project Card 1 -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition duration-300 border border-gray-700">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3">SaaS Analytics Platform</h3>
+                        <p class="text-gray-400 mb-4">A real-time data visualization dashboard for tracking user engagement and revenue metrics. Features custom chart generation and data filtering.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-3 py-1 bg-emerald-700/50 text-emerald-300 rounded-full">React</span>
+                            <span class="text-xs px-3 py-1 bg-emerald-700/50 text-emerald-300 rounded-full">Node.js</span>
+                            <span class="text-xs px-3 py-1 bg-emerald-700/50 text-emerald-300 rounded-full">PostgreSQL</span>
+                        </div>
+                        <a href="#" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-medium inline-block mr-4">View Demo &rarr;</a>
+                        <a href="#" target="_blank" class="text-gray-500 hover:text-white font-medium inline-block">GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition duration-300 border border-gray-700">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3">E-commerce API Gateway</h3>
+                        <p class="text-gray-400 mb-4">Designed and implemented a high-throughput microservice architecture using Go for product inventory and order processing.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-3 py-1 bg-emerald-700/50 text-emerald-300 rounded-full">Go</span>
+                            <span class="text-xs px-3 py-1 bg-emerald-700/50 text-emerald-300 rounded-full">Docker</span>
+                            <span class="text-xs px-3 py-1 bg-emerald-700/50 text-emerald-300 rounded-full">Redis</span>
+                        </div>
+                        <a href="#" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-medium inline-block mr-4">View Docs &rarr;</a>
+                        <a href="#" target="_blank" class="text-gray-500 hover:text-white font-medium inline-block">GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition duration-300 border border-gray-700">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-3">Portfolio Template Site</h3>
+                        <p class="text-gray-400 mb-4">A lightweight, highly customizable portfolio template built with Vue.js and a focus on speed and SEO optimization.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-3 py-1 bg-emerald-700/50 text-emerald-300 rounded-full">Vue.js</span>
+                            <span class="text-xs px-3 py-1 bg-emerald-700/50 text-emerald-300 rounded-full">Tailwind CSS</span>
+                            <span class="text-xs px-3 py-1 bg-emerald-700/50 text-emerald-300 rounded-full">Netlify CMS</span>
+                        </div>
+                        <a href="#" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-medium inline-block mr-4">View Live &rarr;</a>
+                        <a href="#" target="_blank" class="text-gray-500 hover:text-white font-medium inline-block">GitHub &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px bg-gray-800 my-16"></div>
+
+        <!-- 5. Contact Section -->
+        <section id="contact" class="py-16 md:py-20">
+            <h2 class="text-4xl font-bold text-white mb-10 border-b-4 border-emerald-600 pb-2 inline-block">Get In Touch</h2>
+
+            <div class="max-w-3xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700">
+                <p class="text-lg text-gray-300 mb-6 text-center">
+                    Have a project in mind or just want to say hello? Send me a message!
+                </p>
+
+                <!-- Note: The form action is a placeholder. You'll need a service like Formspree or a backend endpoint to actually receive the emails. -->
+                <form action="#" method="POST" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-400 mb-1">Name</label>
+                        <input type="text" id="name" name="name" required
+                               class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-emerald-500 focus:border-emerald-500 outline-none transition duration-150">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                        <input type="email" id="email" name="email" required
+                               class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-emerald-500 focus:border-emerald-500 outline-none transition duration-150">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-400 mb-1">Message</label>
+                        <textarea id="message" name="message" rows="5" required
+                                  class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-emerald-500 focus:border-emerald-500 outline-none transition duration-150"></textarea>
+                    </div>
+                    <button type="submit"
+                            class="w-full px-6 py-3 text-lg font-semibold text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition duration-300">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+            <p>&copy; 2025 Delycee Iranzi. All rights reserved.</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <a href="https://github.com/delycee-dev" target="_blank" class="hover:text-emerald-400 transition duration-300">GitHub</a>
+                <a href="https://linkedin.com/in/delycee-dev" target="_blank" class="hover:text-emerald-400 transition duration-300">LinkedIn</a>
+                <a href="mailto:delycee.dev@example.com" class="hover:text-emerald-400 transition duration-300">Email</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
