@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Development Practical</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1 id="mainTitle">Welcome to My Web Development Journey</h1>
+        <nav class="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p class="highlight">
+                Hello! My name is Iranzi.<br>
+                I am a passionate learner from Kigali currently exploring the world of web development.
+            </p>
+
+            <hr>
+
+            <p>
+                I am interested in web development because it allows me to create interactive experiences,<br>
+                solve real-world problems and continuously learn new technologies.
+            </p>
+        </section>
+
+        <section>
+            <h2>My Favorite Websites</h2>
+            <ul>
+                <li><a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a></li>
+                <li><a href="https://css-tricks.com" target="_blank">CSS-Tricks</a></li>
+                <li><a href="https://frontendmasters.com" target="_blank">Frontend Masters</a></li>
+            </ul>
+
+            <h2>Programming Languages I Want to Master (in order of interest)</h2>
+            <ol>
+                <li>JavaScript</li>
+                <li>Python</li>
+                <li>TypeScript</li>
+                <li>Rust</li>
+                <li>Go</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>My Recent Academic Performance</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Teacher</th>
+                        <th>Marks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Web Development</td>
+                        <td>Mr. Eric</td>
+                        <td>88</td>
+                    </tr>
+                    <tr>
+                        <td>Database Systems</td>
+                        <td>Ms. Aline</td>
+                        <td>92</td>
+                    </tr>
+                    <tr>
+                        <td>Data Structures</td>
+                        <td>Dr. Patrick</td>
+                        <td>85</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Media Example</h2>
+            <figure>
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop" 
+                     alt="Person coding on a laptop with colorful code on screen" 
+                     width="400">
+                <figcaption>Focused coding session – the heart of web development</figcaption>
+            </figure>
+
+            <figure>
+                <video controls width="400">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <figcaption>Sample video: Big Buck Bunny (demo clip)</figcaption>
+            </figure>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Iranzi – Web Development Practical</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me - My Web Development Practical</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1 id="mainTitle">Contact Me</h1>
+        <nav class="menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Send me a message</h2>
+            <form id="contactForm" onsubmit="return validateForm(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+
+            <button id="themeToggle" class="btn secondary">Toggle Dark Mode</button>
+            <p id="currentTime"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Iranzi – Web Development Practical</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+/* Element selectors */
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+/* ID selector (highest specificity) */
+#mainTitle {
+    text-align: center;
+    margin: 20px 0;
+    color: #1a73e8;
+}
+
+/* Class selectors */
+.menu {
+    background-color: #2c3e50;
+    padding: 1rem;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* Descendant selector */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s;
+}
+
+/* Pseudo-class */
+nav ul li a:hover,
+a:hover {
+    background-color: #1a73e8;
+    border-radius: 4px;
+}
+
+table {
+    width: 80%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+thead th {
+    background-color: #1a73e8;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+figure {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+figcaption {
+    font-style: italic;
+    color: #555;
+    margin-top: 0.5rem;
+}
+
+.btn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0d5bd9;
+}
+
+.btn.secondary {
+    background-color: #6c757d;
+}
+
+.btn.secondary:hover {
+    background-color: #5a6268;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+
+input, textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode h1, .dark-mode h2 {
+    color: #8ab4f8;
+}
+
+.dark-mode .menu {
+    background-color: #1e1e1e;
+}
+
+.dark-mode table {
+    background-color: #1e1e1e;
+}
+
+.dark-mode th {
+    background-color: #0d47a1;
+}
+
+.dark-mode tr:nth-child(even) {
+    background-color: #252525;
+}
+// TASK 4: Form Validation
+function validateForm(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+        alert('Error: All fields are required!');
+        return false;
+    }
+
+    if (!email.includes('@')) {
+        alert('Error: Please enter a valid email address (must contain @)');
+        return false;
+    }
+
+    alert('Success! Your message has been sent (demo). Thank you!');
+    document.getElementById('contactForm').reset();
+    return false;
+}
+
+// TASK 5: Multiple JavaScript features
+
+// 1. Show current date & time (updates every second)
+function updateTime() {
+    const now = new Date();
+    document.getElementById('currentTime').textContent = 
+        'Current time: ' + now.toLocaleString();
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// 2. Toggle dark/light mode
+const themeBtn = document.getElementById('themeToggle');
+if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        themeBtn.textContent = isDark ? 'Toggle Light Mode' : 'Toggle Dark Mode';
+    });
+}
+
+// 3. Example: Change text content when clicking anywhere on main
+document.querySelector('main').addEventListener('click', (e) => {
+    if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') {
+        const intro = document.querySelector('main p.highlight');
+        if (intro) {
+            intro.textContent = "You just clicked the main area! Keep exploring! 🚀";
+            setTimeout(() => {
+                intro.textContent = "Hello! My name is Iranzi.\nI am a passionate learner from Kigali currently exploring the world of web development.";
+            }, 3000);
+        }
+    }
+});
